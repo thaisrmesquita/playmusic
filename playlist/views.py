@@ -54,6 +54,15 @@ class PlaylistList(generics.ListCreateAPIView):
 class PlaylistDetail(generics.RetrieveUpdateDestroyAPIView):
 	queryset = Playlist.objects.all()
 	serializer_class = PlaylistSerializer
-	name = 'playlist-detail'
+	name = 'playlist-detail'''
 
-
+class ApiRoot(generics.GenericAPIView):
+	name = 'api-root'
+	def get(self, request, *args, **kwargs):
+		return Response({
+			'records':reverse(RecordList.name, request=request),
+			'genres': reverse(GenreList.name, request=request),
+			'bands': reverse(BandList.name, request=request),
+			'musics': reverse(MusicList.name, request=request),
+			'playlists': reverse(PlaylistList.name, request=request)
+		})

@@ -38,27 +38,27 @@ class Band(models.Model):
         return self.name
 
 
-class Music(models.Model):
+class Playlist(models.Model):
     name = models.CharField(max_length=100)
-    band = models.ForeignKey(Band, verbose_name="Band", on_delete=CASCADE)
-    duration = models.TimeField()
-    year = models.DateField()
 
     class Meta:
-        verbose_name = u'Music'
-        verbose_name_plural = u'Musics'
+        verbose_name = u'Playlist'
+        verbose_name_plural = u'Playlists'
 
     def __str__(self):
         return self.name
 
 
-class Playlist(models.Model):
+class Music(models.Model):
     name = models.CharField(max_length=100)
-    music = models.ManyToManyField(Music, verbose_name='Music')
+    band = models.ForeignKey(Band, verbose_name="Band", on_delete=CASCADE)
+    duration = models.TimeField()
+    year = models.DateField()
+    playlist = models.ForeignKey(Playlist, verbose_name="Playlist", on_delete=CASCADE)
 
     class Meta:
-        verbose_name = u'Playlist'
-        verbose_name_plural = u'Playlists'
+        verbose_name = u'Music'
+        verbose_name_plural = u'Musics'
 
     def __str__(self):
         return self.name

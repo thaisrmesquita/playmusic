@@ -19,7 +19,6 @@ from django.urls import path
 from playlist import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('records/', views.RecordList.as_view(), name=views.RecordList.name),
     path('records/<int:pk>/', views.RecordDetail.as_view(), name=views.RecordDetail.name),
     path('genres/', views.GenreList.as_view(), name=views.GenreList.name),
@@ -29,5 +28,6 @@ urlpatterns = [
     path('music/', views.MusicList.as_view(), name=views.MusicList.name),
     path('music/<int:pk>/', views.MusicDetail.as_view(), name=views.MusicDetail.name),
     path('playlists/', views.PlaylistList.as_view(), name=views.PlaylistList.name),
-    path('playlists/<int:pk>/', views.PlaylistDetail.as_view(), name=views.PlaylistDetail.name)
+    path('playlist/<int:pk>/', views.PlaylistDetail.as_view(), name=views.PlaylistDetail.name),
+    path('', views.ApiRoot.as_view(),name=views.ApiRoot.name)
 ]

@@ -3,7 +3,6 @@ from playlist.models import Record
 from playlist.models import *
 
 class RecordSerializer(serializers.HyperlinkedModelSerializer):
-
     class Meta:
         model = Record
         fields = ('url','name',)
@@ -21,14 +20,15 @@ class BandSerializer(serializers.HyperlinkedModelSerializer):
 
 class MusicSerializer(serializers.HyperlinkedModelSerializer):
     band = serializers.SlugRelatedField(queryset=Band.objects.all(), slug_field='name')
+    playlist = serializers.SlugRelatedField(queryset=Playlist.objects.all(), slug_field='name')
     class Meta:
         model = Music
-        fields = ('url','name','band','duration','year')
+        fields = ('url','name','band','duration','year','playlist')
 
 
 class PlaylistSerializer(serializers.HyperlinkedModelSerializer):
-    music = serializers.SlugRelatedField(queryset=Music.objects.all(), slug_field='name')
     class Meta:
         model = Playlist
-        fields = ('url','name','music')
+        fields = ('url','name')
+
 
