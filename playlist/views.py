@@ -44,14 +44,16 @@ class MusicList(generics.ListCreateAPIView):
 class MusicDetail(generics.RetrieveUpdateDestroyAPIView):
 	queryset = Music.objects.all()
 	serializer_class = MusicSerializer
-    name = 'music-detail'
+	name = 'music-detail'
 
 class PlaylistList(generics.ListCreateAPIView):
 	queryset = Playlist.objects.all()
-	serializer_class = PlaylistListSerializer
+	serializer_class = PlaylistSerializer
 	name = 'playlist-list'
 
 class PlaylistDetail(generics.RetrieveUpdateDestroyAPIView):
 	queryset = Playlist.objects.all()
-    serializer_class = PlaylistSerializer
-    name = 'playlist-detail'
+	serializer_class = PlaylistSerializer
+	name = 'playlist-detail'
+
+
