@@ -8,6 +8,7 @@ class Record(models.Model):
     class Meta:
         verbose_name = u'Record'
         verbose_name_plural = u'Records'
+        ordering = ('name' , )
 
     def __str__(self):
         return self.name

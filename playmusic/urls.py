@@ -20,6 +20,14 @@ from playlist import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('records/', views.record_list),
-    path('records/<int:pk>/', views.record_detail)
+    path('records/', views.RecordList.as_view(), name=views.RecordList.name),
+    path('records/<int:pk>/', views.RecordDetail.as_view(), name=views.RecordDetail.name),
+    path('genres/', views.GenreList.as_view(), name=views.GenreList.name),
+    path('genres/<int:pk>/', views.GenreDetail.as_view(), name=views.GenreDetail.name),
+    path('bands/', views.BandList.as_view(), name=views.BandList.name),
+    path('bands/<int:pk>/', views.BandDetail.as_view(), name=views.BandDetail.name),
+    path('music/', views.MusicList.as_view(), name=views.MusicList.name),
+    path('music/<int:pk>/', views.MusicDetail.as_view(), name=views.MusicDetail.name),
+    path('playlists/', views.PlaylistList.as_view(), name=views.PlaylistList.name),
+    path('playlists/<int:pk>/', views.PlaylistDetail.as_view(), name=views.PlaylistDetail.name)
 ]
