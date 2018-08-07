@@ -2,21 +2,22 @@ from rest_framework import serializers
 from playlist.models import Record
 from playlist.models import *
 
+
 class RecordSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Record
         fields = ('url','name',)
-
-class GenreSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Genre
-        fields = ('url','name')
 
 class BandSerializer(serializers.HyperlinkedModelSerializer):
     genre = serializers.SlugRelatedField(queryset=Genre.objects.all(), slug_field='name')
     class Meta:
         model = Band
         fields=('url','name','genre','record')
+
+class GenreSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Genre
+        fields = ('url','name',)
 
 class MusicSerializer(serializers.HyperlinkedModelSerializer):
     band = serializers.SlugRelatedField(queryset=Band.objects.all(), slug_field='name')
@@ -25,10 +26,10 @@ class MusicSerializer(serializers.HyperlinkedModelSerializer):
         model = Music
         fields = ('url','name','band','duration','year','playlist')
 
-
 class PlaylistSerializer(serializers.HyperlinkedModelSerializer):
+    musics = MusicSerializer(many=True, read_only=True)
     class Meta:
         model = Playlist
-        fields = ('url','name')
+        fields = ('url','name','musics',)
 
 
