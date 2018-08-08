@@ -5,6 +5,8 @@ from playlist.models import *
 from playlist.serializers import *
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
+from rest_framework.authentication import SessionAuthentication
+from rest_framework.permissions import IsAdminUser, IsAuthenticated, AllowAny
 
 
 class RecordList(generics.ListCreateAPIView):
@@ -68,10 +70,12 @@ class UsuarioDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 class PlaylistList(generics.ListCreateAPIView):
+
     queryset = Playlist.objects.all()
     serializer_class = PlaylistSerializer
     name = 'playlist-list'
-
+    authentication_classes = [SessionAuthentication]
+    permission_classes = (IsAuthenticated,)
 
 class PlaylistDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Playlist.objects.all()

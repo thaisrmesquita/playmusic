@@ -11,7 +11,7 @@ class Usuario(models.Model):
 
 
 class Playlist(models.Model):
-    usuario = models.ForeignKey(Usuario, on_delete=CASCADE, related_name="playlists")
+    usuario = models.ForeignKey(Usuario, on_delete=CASCADE, related_name="usuario_playlists")
     name = models.CharField(max_length=100)
 
     def __str__(self):
