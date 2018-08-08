@@ -1,6 +1,22 @@
 from django.db import models
 from django.db.models import CASCADE
 
+class Usuario(models.Model):
+    name = models.CharField(max_length=255)
+    email = models.CharField(max_length=255)
+    senha = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
+
+
+class Playlist(models.Model):
+    usuario = models.ForeignKey(Usuario, on_delete=CASCADE, related_name="playlists")
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
 
 class Record(models.Model):
     name = models.CharField(max_length=100)
@@ -23,13 +39,6 @@ class Band(models.Model):
     name = models.CharField(max_length=100)
     genre = models.ForeignKey(Genre, on_delete=CASCADE, related_name="bands")
     record = models.ForeignKey(Record, related_name='records_bands', on_delete=CASCADE)
-
-    def __str__(self):
-        return self.name
-
-
-class Playlist(models.Model):
-    name = models.CharField(max_length=100)
 
     def __str__(self):
         return self.name

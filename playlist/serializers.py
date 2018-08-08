@@ -27,9 +27,16 @@ class MusicSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('url','name','band','duration','year','playlist')
 
 class PlaylistSerializer(serializers.HyperlinkedModelSerializer):
+    usuario = serializers.SlugRelatedField(queryset=Usuario.objects.all(), slug_field='name')
     musics = MusicSerializer(many=True, read_only=True)
     class Meta:
         model = Playlist
-        fields = ('url','name','musics',)
+        fields = ('url','name','usuario','musics',)
+
+class UsuarioSerializer(serializers.HyperlinkedModelSerializer):
+    playlists = PlaylistSerializer(many=True, read_only=True)
+    class Meta:
+        model = Usuario
+        fields = ('url', 'name','email','senha','playlists')
 
 

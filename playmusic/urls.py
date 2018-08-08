@@ -19,6 +19,8 @@ from django.urls import path
 from playlist import views
 
 urlpatterns = [
+    path('usuarios/', views.UsuarioList.as_view(), name=views.UsuarioList.name),
+    path('usuarios/<int:pk>/', views.UsuarioDetail.as_view(), name=views.UsuarioDetail.name),
     path('records/', views.RecordList.as_view(), name=views.RecordList.name),
     path('records/<int:pk>/', views.RecordDetail.as_view(), name=views.RecordDetail.name),
     path('genres/', views.GenreList.as_view(), name=views.GenreList.name),
